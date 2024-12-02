@@ -1,0 +1,5 @@
+REPO_DIR = ".repo"
+OBJECTS_DIR = f"{REPO_DIR}/objects"
+REFS_DIR = f"{REPO_DIR}/refs"
+HEAD_FILE = f"{REPO_DIR}/HEAD"
+INDEX_FILE = f"{REPO_DIR}/index"

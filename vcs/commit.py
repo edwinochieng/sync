@@ -1,7 +1,7 @@
 import os
 import hashlib
 import json
-from vcs.config import REPO_DIR,INDEX_FILE,OBJECTS_DIR,HEAD_FILE,REFS_DIR
+from vcs.config import REPO_DIR, INDEX_FILE, OBJECTS_DIR, HEAD_FILE, REFS_DIR
 
 def commit_changes(message):
     if not os.path.exists(REPO_DIR):
@@ -12,10 +12,10 @@ def commit_changes(message):
         print("Nothing to commit.")
         return
 
+    # Load staged files
     with open(INDEX_FILE, "r") as index:
         staged = json.load(index)
     
-    # Create commit object
     commit = {
         "message": message,
         "parent": get_current_commit(),
@@ -27,7 +27,9 @@ def commit_changes(message):
     
     # Update branch ref
     current_branch = get_current_branch()
-    with open(f"{REFS_DIR}/{current_branch}", "w") as branch_file:
+    branch_path = os.path.join(REFS_DIR, current_branch)  
+    os.makedirs(os.path.dirname(branch_path), exist_ok=True) 
+    with open(branch_path, "w") as branch_file:
         branch_file.write(commit_hash)
     
     # Clear the index
@@ -40,7 +42,7 @@ def get_current_branch():
 
 def get_current_commit():
     current_branch = get_current_branch()
-    branch_path = f"{REFS_DIR}/{current_branch}"
+    branch_path = os.path.join(REFS_DIR, current_branch)  
     if os.path.exists(branch_path):
         with open(branch_path, "r") as branch_file:
             return branch_file.read().strip()

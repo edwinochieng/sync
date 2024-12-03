@@ -8,6 +8,7 @@ from vcs.merging import merge_branches
 from vcs.cloning import clone_repo
 from vcs.diff import diff_commits
 from vcs.init import init_repo
+from vcs.ignore import ignore_file
 
 
 def main():
@@ -35,6 +36,8 @@ def main():
         diff_commits(args[1], args[2])
     elif command == "clone" and len(args) > 1:
         clone_repo(args[1])
+    elif command == "ignore" and len(args) > 1:
+        ignore_file(args[1])
     else:
         print(f"Unknown command: {command}")
 

@@ -5,7 +5,7 @@ from vcs.config import REPO_DIR, INDEX_FILE
 from vcs.utils import hash_file
 
 def should_ignore(file_path):
-    ignore_file = ".repoignore"
+    ignore_file = ".ignore"
     if not os.path.exists(ignore_file):
         return False
 
@@ -18,7 +18,7 @@ def should_ignore(file_path):
             return True
     return False
 
-def add_to_index(file_path):
+def ignore_file(file_path):
     if not os.path.exists(REPO_DIR):
         print("No repository found. Please initialize one.")
         return

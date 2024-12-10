@@ -1,0 +1,5 @@
+.repo
+vcs/__pycache__
+venv
+sync.egg-info
+__pycache__
